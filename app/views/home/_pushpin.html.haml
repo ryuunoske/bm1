@@ -1,0 +1,16 @@
+#alert
+#notice
+%script{:charset => "UTF-8", :src => "https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&s=1", :type => "text/javascript"}
+:javascript
+	var x = document.getElementById("notice");
+	function getLocation() {
+			if (navigator.geolocation) {
+					navigator.geolocation.getCurrentPosition(showPosition);
+			} else {
+					x.innerHTML = "Geolocation is not supported by this browser.";
+			}
+	}
+	function showPosition(position) {
+			x.innerHTML = "Latitude: " + position.coords.latitude + 
+			"<br>Longitude: " + position.coords.longitude; 
+	}
