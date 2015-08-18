@@ -1,0 +1,11 @@
+%script{:charset => "UTF-8", :src => "https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&s=1", :type => "text/javascript"}
+:javascript
+	$(document).ready(GetMap);
+	function GetMap() {
+		var map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), {
+			credentials: "Aj7xOeHv3mwl4nqgF2ok_aFqUvIJGuYEdBcHreNG_jTbtW0aDuawEI-m8jsyrKpf",
+			center: new Microsoft.Maps.Location(45.5, -122.5),
+			mapTypeId: Microsoft.Maps.MapTypeId.automatic,
+			zoom: 7
+		});
+	}
