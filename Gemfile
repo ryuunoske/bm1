@@ -69,4 +69,5 @@ gem 'gon'
 #gem 'gmaps4rails' #Gem has Some bugs with not supporting the way google api reference works
 #End Ankit Gems
 #heroku gem
+gem 'bundler'
 gem 'rails_12factor', group: :production

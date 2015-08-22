@@ -306,6 +306,7 @@ DEPENDENCIES
   annotate
   better_errors
   bootstrap-sass (~> 3.3.4.1)
+  bundler
   byebug
   capybara
   coffee-rails (~> 4.1.0)
