@@ -15,9 +15,7 @@ gem 'less-rails'
 #gem 'adminlte-rails' #Has Old Bianeries
 #gem 'adminlte-generators'
 
-group :production do
-  gem 'pg'
-end
+gem 'pg'
 
 group :development do
   gem 'better_errors'
