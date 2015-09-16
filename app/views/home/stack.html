@@ -1,0 +1,83 @@
+Getting Error=> 'Uncaught TypeError: Cannot read property 'createRandomId' of undefined'
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+				<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+				<script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+				<script charset='UTF-8' src='https://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=7.0&amp;s=1' type='text/javascript'></script>
+				<script>
+					var map = null;
+					var directionsManager;
+					var directionsErrorEventObj;
+					var directionsUpdatedEventObj; 
+					$(document).ready(function() {
+						GetMap();
+						$('#click').click(function() {
+							createDirections();
+						});
+					});
+					function GetMap() {
+						map = new Microsoft.Maps.Map(document.getElementById("mapDiv"), {
+							credentials: "Aj7xOeHv3mwl4nqgF2ok_aFqUvIJGuYEdBcHreNG_jTbtW0aDuawEI-m8jsyrKpf"
+						});
+					}
+					function createDirections() {
+							if (!directionsManager) {
+							Microsoft.Maps.loadModule('Microsoft.Maps.Directions', { callback: createDrivingRoute });
+						} else {
+							createDrivingRoute();
+						}
+					}
+					function createDrivingRoute() {
+						if (!directionsManager) {
+							createDirectionsManager();
+						}
+						directionsManager.resetDirections();
+						// Set Route Mode to driving 
+						directionsManager.setRequestOptions({ routeMode: Microsoft.Maps.Directions.RouteMode.driving });
+						// Define Waypoints
+						var agraWaypoint = new Microsoft.Maps.Directions.Waypoint({
+							location: new Microsoft.Maps.Location(27.1800, 78.0200)
+						});
+						var delhiWaypoint = new Microsoft.Maps.Directions.Waypoint({
+							location: new Microsoft.Maps.Location(28.6100, 77.2300)
+						});
+						// Push waypoitns to Map
+						directionsManager.addWaypoint(agraWaypoint);
+						directionsManager.addWaypoint(delhiWaypoint);
+						// Set the element in which the itinerary will be rendered
+						directionsManager.setRenderOptions({ itineraryContainer: document.getElementById('directionsItinerary') });
+						//alert('Calculating directions...');
+						directionsManager.calculateDirections();
+					}
+					function createDirectionsManager() {
+						if (!directionsManager) {
+							directionsManager = new Microsoft.Maps.Directions.DirectionsManager(map);
+							console.log('directions manager loaded');
+						}
+						//alert(displayMessage);
+						directionsManager.resetDirections();
+						directionsErrorEventObj = Microsoft.Maps.Events.addHandler(directionsManager, 'directionsError', function(arg) { console.log(arg.message) });
+						directionsUpdatedEventObj = Microsoft.Maps.Events.addHandler(directionsManager, 'directionsUpdated', function() { console.log('Directions updated') });
+					}
+				</script>
+			</head>
+			<body>
+				<div class='container'>
+					<div class='row'>
+						<div class='col-md-offset-1 col-lg-offset-1 col-xs-12 col-sm-12 col-md-9 col-lg-9'>
+							<h3>
+								<u>
+									<div class='text-center' id='click' style='cursor:pointer;'>Get Directions</div>
+								</u>
+							</h3>
+							<div id='mapDiv' style='position:relative; width:100%; height:43em;'></div>
+						</div>
+						<div class='col-xs-12 col-sm-12 col-md-2 col-lg-2'>
+							<div id='directionsItinerary'></div>
+						</div>
+					</div>
+				</div>
+			</body>
+		</html>
