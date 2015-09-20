@@ -31,7 +31,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   #Second Group
-  gem 'factory_girl_rails'
+  #gem 'factory_girl_rails'
   gem 'faker'
   gem 'rspec-rails'
   gem 'mailcatcher'
